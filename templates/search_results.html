@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>社員一覧</title>
+
+</head>
+
+<body>
+
+
+  <!-- ヘッダー -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarEexample">
+        <a class="navbar-brand" href="#">社員一覧画面</a>
+        <a href="logout.php"><button class="btn btn-danger navbar-right navbar-btn">ログアウト</button></a>
+        <p class="navbar-text navbar-right">ようこそ {{ session_name }} さん。&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- 検索 -->
+  <div class="container">
+    <form action="search_results.php" method="POST">
+      <table class="table">
+
+        <tr>
+          <td style="border:none" class="text-center form-inline">ID &nbsp;&nbsp;&nbsp;&nbsp;:
+            <input name="id" type="text" class="form-control" id="kana" placeholder="ID" size="20">
+          </td>
+
+          <td style="border:none" class="text-left form-inline">条件 :
+            <label> AND &nbsp;<input type="radio" name="radio" id="radio1" value="and"></label>
+            <label>OR &nbsp;<input type="radio" name="radio" id="radio2" value="or" checked=""></label>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td style="border:none" class="text-center form-inline">名前 :
+            <input name="name" type="text" class="form-control" id="kana" placeholder="名前" size="20">
+          </td>
+
+          <td style="border:none">
+            <button name="search" class="btn btn-success"><i class="glyphicon glyphicon-search"></i> 検索</button>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+
+  </div>
+
+
+
+
+
+
+  <!-- テーブル -->
+  <div class="container">
+
+    <!-- 伝票一覧ボタン -->
+    <a href="voucher_list.php"><button type="button" class="btn btn-info">伝票一覧</button></a>
+    <!-- 新規登録ボタン -->
+    <a href="signUp_form.php"><button type="button" class="btn btn-primary sign-up">新規登録</button></a>
+
+
+    <table class="table table-bordered" method="post">
+
+      <thead>
+        <tr>
+          <th>社員ID</th>
+          <th>社員名</th>
+          <th>メールアドレス</th>
+          <th>編集 / 削除</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for key, value in searchResult %}
+        <tr>
+          <th> {{ value.No }} </th>
+          <td> {{ value.Name }} </td>
+          <td> {{ value.MailAddress }} </td>
+
+          <td>
+            <div class="link" style="display: inline-flex">
+              <form id="edit_worker" name="edit_form" method="POST" action="edit_form.php">
+                <!-- トークン生成 -->
+                <input type="hidden" name="token" value="{{ token }}">
+                <input type="hidden" name="No" value="{{ value.No }}">
+                <a class="edit_workerLink" href="javascript:edit_form[ {{ key }} ].submit()">編集 /</a>
+              </form>
+
+              <form id="del_worker" name="delete_worker" method="POST" action="delete_confirm.php">
+                <!-- トークン生成 -->
+                <input type="hidden" name="token" value="{{ token }}">
+                <input type="hidden" name="No" value="{{ value.No }}">
+                <a class="delete_workerLink" href="javascript:delete_worker[ {{ key }} ].submit()">&nbsp;削除</a>
+            </div>
+          </td>
+          </form>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+  <script>
+    $(function() {
+
+      // 削除リンクをクリックしたとき
+      $('.delete_workerLink').click(function() {
+
+        $('#del_worker').submit();
+
+      });
+
+      // 編集リンクをクリックしたとき
+      $('.edit_workerLink').click(function() {
+
+        $('#edit_worker').submit();
+
+      });
+
+    })
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

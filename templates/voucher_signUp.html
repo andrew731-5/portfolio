@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/voucher_signUp.css">
+  <title>伝票入力画面</title>
+
+</head>
+
+<body>
+
+
+  <!-- ヘッダー -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarEexample">
+        <a class="navbar-brand" href="#">伝票入力画面</a>
+        <a href="logout.php"><button class="btn btn-danger navbar-right navbar-btn">ログアウト</button></a>
+        <p class="navbar-text navbar-right">ようこそ {{ session_name }} さん。&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- テーブル -->
+  <div class="container">
+
+    <!-- バリデーションエラーの表示 -->
+    <div class="validationError">
+    {{ secondLineErr }} {{ thirdLineErr }} {{ fourthLineErr }} {{ fifthLineErr }} {{ secondCountErr }}
+    {{ secondPriceErr }} {{ thirdCountErr }} {{ thirdPriceErr }} {{ fourthCountErr }} {{ fourthPriceErr }}
+    {{ fifthCountErr }} {{ fifthPriceErr }} {{ title_error }} {{ productName_error }} {{ number_error }} {{ price_error }}
+  </div>
+
+    <table class="table table-bordered">
+      <form action="voucher_confirm.php" method="post">
+
+        <label for="input_password" class="col-md-2 control-label">タイトル：</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" name="title" placeholder="タイトル" value="{{ title }}"/></label><br />
+        </div>
+
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>個数</th>
+          <th>価格</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+            <th><input type="text" name="productName[]" class="form-control" value="{{ productNameArr0 }}"></th>
+            <td><input type="text" name="number[]" class="form-control" value="{{ numberArr0 }}"></td>
+            <td><input type="text" name="price[]" class="form-control" value="{{ priceArr0 }}"></td>
+
+        </tr>
+        <tr>
+          <th><input name="productName[]" class="form-control" type="text" value="{{ productNameArr1 }}"></th>
+          <td><input name="number[]" class="form-control" type="text" value="{{ numberArr1 }}"></td>
+          <td><input name="price[]" class="form-control" type="text" value="{{ priceArr1 }}"></td>
+        </tr>
+        <tr>
+          <th><input name="productName[]" class="form-control" type="text" value="{{ productNameArr2 }}"></th>
+          <td><input name="number[]" class="form-control" type="text" value="{{ numberArr2 }}"></td>
+          <td><input name="price[]" class="form-control" type="text" value="{{ priceArr2 }}"></td>
+        </tr>
+        <tr>
+          <th><input name="productName[]" class="form-control" type="text" value="{{ productNameArr3 }}"></th>
+          <td><input name="number[]" class="form-control" type="text" value="{{ numberArr3 }}"></td>
+          <td><input name="price[]" class="form-control" type="text" value="{{ priceArr3 }}"></td>
+        </tr>
+        <tr>
+          <th><input name="productName[]" class="form-control" type="text" value="{{ productNameArr4 }}"></th>
+          <td><input name="number[]" class="form-control" type="text" value="{{ numberArr4 }}"></td>
+          <td><input name="price[]" class="form-control" type="text" value="{{ priceArr4 }}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+
+        <!-- トークン発行 -->
+        <input type="hidden" name="token" value="{{ token }}">
+
+          <a href="voucher_list.php" onclick="history.back()"><button type="button" class="btn btn-default col-sm-offset-2 col-sm-2">戻る</button></a>
+          <button class="btn btn-primary col-sm-offset-2 col-sm-2">確認</button>
+      </div>
+    </div>
+    </form>
+
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

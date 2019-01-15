@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/singUp_confirm.css">
+  <title>社員編集確認</title>
+
+</head>
+
+<body>
+
+
+  <!-- ヘッダー -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarEexample">
+        <a class="navbar-brand" href="#">社員編集確認画面</a>
+        <a href="logout.php"><button class="btn btn-danger navbar-right navbar-btn">ログアウト</button></a>
+        <p class="navbar-text navbar-right">ようこそ {{ session_name }} さん。&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- 登録フォーム -->
+  <div class="container">
+
+    <form class="form-horizontal" action="edit_complete.php" method="post">
+
+      <div class="form-group">
+        <label class="col-sm-6 control-label">社員No</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ No }}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-6 control-label">氏名</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ name }}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-6 control-label">メールアドレス</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ email }}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-6 control-label">パスワード</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ password }}<p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <!-- ログイン判定トークン生成 -->
+          <input type="hidden" name="token" value="{{ token }}">
+          <!-- 2重投稿防止トークン生成 -->
+          <input type="hidden" name="duplication_token" value="{{ duplication_token }}">
+          <a href="edit_form.php" onclick="history.back()"><button type="button" class="btn btn-default col-sm-offset-2 col-sm-2">戻る</button></a>
+          <button class="btn btn-primary col-sm-offset-2 col-sm-2">登録</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

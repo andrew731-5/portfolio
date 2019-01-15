@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="css/login.css"> -->
+  <title>ログイン</title>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+  				<span class="sr-only">Toggle navigation</span>
+  				<span class="icon-bar"></span>
+  				<span class="icon-bar"></span>
+  				<span class="icon-bar"></span>
+  			</button>
+
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarEexample">
+
+        <h3><p class="text-center">ポートフォリオ </p></h3>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ログイン画面 -->
+  <div class="container">
+
+    <!-- 認証エラー -->
+    <p style="text-align: center;"><font color="RED"> {{ not_match }} </font></p>
+
+    <!-- バリデーションエラー -->
+    <ul style="list-style-type: none;" class="validation_errors">
+      {% for error in validation_Errors %}
+
+      <li style="text-align: center;"><font color="RED">{{ error }}</font> <br> </li>
+
+      {% endfor %}
+    </ul>
+
+    <p style="text-align: center;"><font color="RED">{{ loginId_Errors }}</font></p>
+    <p style="text-align: center;"><font color="RED">{{ password_Errors }}</font></p>
+
+    <div class="wrapper">
+      <form action="worker_list.php" method="post" name="Login_Form" class="form-signin">
+
+        <label for="input_name" class="col-md-2 control-label">ログインID：</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" name="loginId" placeholder="ログインID" value="{{ loginId }}"/><br />
+        </div>
+
+        <label for="input_password" class="col-md-2 control-label">パスワード：</label>
+        <div class="col-md-10">
+          <input type="password" class="form-control" name="password" placeholder="パスワード" value="{{ password }}"/></label><br />
+        </div>
+
+        <div class="col-md-offset-2 col-md-10">
+        <button class="btn btn-lg btn-primary btn-block" name="login" value="Login" type="Submit">Login</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

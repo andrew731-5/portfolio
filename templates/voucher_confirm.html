@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/.css">
+  <title>伝票入力確認画面</title>
+
+</head>
+
+<body>
+
+
+  <!-- ヘッダー -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarEexample">
+        <a class="navbar-brand" href="#">伝票入力確認画面</a>
+        <a href="logout.php"><button class="btn btn-danger navbar-right navbar-btn">ログアウト</button></a>
+        <p class="navbar-text navbar-right">ようこそ {{ session_name }} さん。&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- テーブル -->
+  <div class="container">
+
+    <label for="input_password" class="col-md-2 control-label">タイトル：</label>
+    <div class="col-md-8">
+      <p class="form-control-static"> {{ title }} </p>
+    </div>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>個数</th>
+          <th>価格</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for value in voucher %}
+        <tr>
+          <td>
+            <p class="form-control-static"> {{ value.productName }} </p>
+          </td>
+
+          <td>
+            <p class="form-control-static"> {{ value.number }} </p>
+          </td>
+
+          <td>
+            <p class="form-control-static"> {{ value.price }} </p>
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <form action="voucher_signUp.php" method="post">
+          <button class="btn btn-default col-sm-offset-2 col-sm-2">戻る</button>
+        </form>
+        <form action="voucher_output.php" method="post">
+          <!-- トークン生成 -->
+          <input type="hidden" name="token" value="{{ token }}">
+          <button class="btn btn-primary col-sm-offset-2 col-sm-2">伝票表示</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

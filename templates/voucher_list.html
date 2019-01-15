@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/voucher_list.css">
+  <title>伝票一覧画面</title>
+
+</head>
+
+<body>
+
+
+  <!-- ヘッダー -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarEexample">
+        <a class="navbar-brand" href="">伝票一覧画面</a>
+        <a href="logout.php"><button class="btn btn-danger navbar-right navbar-btn">ログアウト</button></a>
+        <p class="navbar-text navbar-right">ようこそ {{ session_name }} さん。&nbsp;&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 検索 -->
+  <div class="container">
+    <form action="searchVoucherLists.php" method="post">
+      <table class="table col-md-8">
+
+          <tr>
+            <td style="border:none" class="text-center form-inline">商品名 :
+              <input name="itemName" type="text" class="form-control" id="kana" placeholder="商品名" size="20">
+            </td>
+
+            <td style="border:none">
+              <button name="search"class="btn btn-success center-block"><i class="glyphicon glyphicon-search"></i> 検索</button>
+            </td>
+          </tr>
+
+      </table>
+    </form>
+  </div>
+
+
+  <!-- テーブル -->
+  <div class="container">
+
+    <!-- トークン生成 -->
+    <input type="hidden" name="token" value="{{ token }}">
+
+    <!-- 伝票入力ボタン -->
+    <a href="voucher_signUp.php"><button type="button" class="btn btn-primary sign-up">伝票入力</button></a>
+    <!-- 社員一覧ボタン -->
+    <a href="worker_list.php"><button type="button" class="btn btn-info">社員一覧</button></a>
+
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>タイトル</th>
+          <th>登録者</th>
+          <th>伝票出力</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in row %}
+        <tr>
+          <th>{{ value.TitleNo }}</th>
+          <td>{{ value.Title }}</td>
+          <td>{{ value.RegisteredPerson }}</td>
+          <td>
+            <div class="link" style="display: inline-flex">
+            <form name="voucherList" method="post" action="voucherList.php">
+              <!-- トークン生成 -->
+              <input type="hidden" name="token" value="{{ token }}">
+              <input type="hidden" name="TitleNo" value="{{ value.TitleNo }}">
+            <a href="javascript:voucherList[ {{ key }} ].submit()">表示</a>
+            </form>
+          </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+</html>

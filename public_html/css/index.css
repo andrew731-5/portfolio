@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.sign-up {
+  float: right;
+}
+
+.btn {
+  margin-bottom: 13px;
+}
+
+.table td {
+  border: none;
+}
